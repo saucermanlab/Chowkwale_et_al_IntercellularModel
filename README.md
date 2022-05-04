@@ -6,10 +6,10 @@ All the files required for setting up the model are in the `setup` directory. Th
 
 In case the files are deleted, run the following commands from the home directory.
 
-`
+```
 cd setup
 setupModel.m
-`
+```
 
 ### Recreating figures
 
