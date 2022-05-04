@@ -1,4 +1,4 @@
-# Chowkwale_et_al_IntercellularModel
+## Chowkwale et al, Intercellular model predicts mechanisms of inflammation-scar couping after myocardial infarction
 
 ### Initial setup for the model
 
