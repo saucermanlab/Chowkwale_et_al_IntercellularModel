@@ -112,7 +112,7 @@ for i=1:length(t)
     % (lam*tgfb - d)F - (lam*tgfb/(f_max*inf_size))*(F^2)
     tgfb = t(i)./(t(i)+sat); 
     eq = [-(lam*tgfb/(f_max*inf_size)), (lam*tgfb - d), 0];
-    eq(isinf(eq)) = 0;
+    %eq(isinf(eq)) = 0;
     r = roots(eq);
     fixed_points(:, i) = r';
 
@@ -122,12 +122,13 @@ for i=1:length(t)
     for i=1:length(t)
         tgfb = t(i)./(t(i)+sat);
         dfdt = lam*tgfb*f*(1 - (f/(inf_size*f_max))) - d*f;
-        g = diff(dfdt);
+        g = diff(dfdt, f);
         stability(1, i) = vpa(subs(g,f,fixed_points(1, i)));
         stability(2, i) = vpa(subs(g,f,fixed_points(2, i)));
     end
 end
 
+% negative = stable, positive = unstable
 stability(stability > 0) = 0;
 stability(stability < 0) = 1;
 
@@ -135,7 +136,7 @@ figure; hold on;
 for i=1:length(t)
     for j=1:2
         p = plot(t(i), fixed_points(j, i), '-ko');
-        if stability(j, i) == 1
+        if stability(j, i) == 1 % stable
             p.MarkerFaceColor = [0 0 0];
             p.MarkerSize = 7;
             p.MarkerEdgeColor = [0 0 0];
@@ -147,7 +148,7 @@ plot(t, fixed_points(2, :), '-k', 'LineWidth', 1.5);
 title('Transcritical bifurcation');
 
 %% Figure 7D - Inset
-t = [0:0.1:1]; f_max = 7000; lam = 0.15; d = 0.0035; sat = 3;
+t = [0:0.01:0.1, 0.2:0.1:1]; f_max = 7000; lam = 0.15; d = 0.0035; sat = 3;
 inf_size = 1;
 fixed_points = zeros(2, length(t));
 stability = zeros(2, length(t));
@@ -157,7 +158,7 @@ for i=1:length(t)
     % (lam*tgfb - d)F - (lam*tgfb/(f_max*inf_size))*(F^2)
     tgfb = t(i)./(t(i)+sat); 
     eq = [-(lam*tgfb/(f_max*inf_size)), (lam*tgfb - d), 0];
-    eq(isinf(eq)) = 0;
+    %eq(isinf(eq)) = 0;
     r = roots(eq);
     fixed_points(:, i) = r';
 
@@ -167,7 +168,7 @@ for i=1:length(t)
     for i=1:length(t)
         tgfb = t(i)./(t(i)+sat);
         dfdt = lam*tgfb*f*(1 - (f/(inf_size*f_max))) - d*f;
-        g = diff(dfdt);
+        g = diff(dfdt, f);
         stability(1, i) = vpa(subs(g,f,fixed_points(1, i)));
         stability(2, i) = vpa(subs(g,f,fixed_points(2, i)));
     end
