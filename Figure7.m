@@ -148,7 +148,7 @@ plot(t, fixed_points(2, :), '-k', 'LineWidth', 1.5);
 title('Transcritical bifurcation');
 
 %% Figure 7D - Inset
-t = [0:0.01:0.1, 0.2:0.1:1]; f_max = 7000; lam = 0.15; d = 0.0035; sat = 3;
+t = [0.01:0.01:0.15]; f_max = 7000; lam = 0.15; d = 0.0035; sat = 3;
 inf_size = 1;
 fixed_points = zeros(2, length(t));
 stability = zeros(2, length(t));
@@ -190,6 +190,7 @@ for i=1:length(t)
 end
 plot(t, fixed_points(1, :), '-k', 'LineWidth', 1.5);
 plot(t, fixed_points(2, :), '-k', 'LineWidth', 1.5);
+yticks([(-4.5:1:-0.5)*1e4, 0, 0.5e4]);
 title('Transcritical bifurcation');
 
 %% Figure 7E Bifurcation diagram - removing F
